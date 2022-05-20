@@ -39,16 +39,15 @@ public abstract class OAHashTable implements IHashTable {
 			hash_res = Hash(hte.GetKey(), i);
 
 			// Checks if the key of hte already exists
-			if (this.table[hash_res].GetKey() == hte.GetKey()){
+			if (this.table[hash_res] != null && this.table[hash_res].GetKey() == hte.GetKey()){
 				throw new KeyAlreadyExistsException(hte);
 			}
 
-			if (this.table[hash_res].GetKey() == -1){
+			if (this.table[hash_res] != null && this.table[hash_res].GetKey() == -1){
 				if (first_deleted == -1){
 					first_deleted = hash_res;
 				}
 			}
-
 			// Add hte if it does not exist
 			if (this.table[hash_res] == null){
 				// In case we can insert the element to a deleted element index
@@ -73,7 +72,7 @@ public abstract class OAHashTable implements IHashTable {
 		// Finding the index of the element with key, if exists
 		int index = -1;
 		for (int i=0 ; i < this.table.length ; i++ ) {
-			if (this.table[i].GetKey() == key){
+			if (this.table[i] != null && this.table[i].GetKey() == key){
 				index = i;
 				break;
 			}
