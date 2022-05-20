@@ -1,13 +1,26 @@
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ModHash {
-	
+	private long a;
+	private long b;
+	private int m;
+	private long p;
+
+	public ModHash(long a, long b, long p, int m)  {
+		this.a = a;
+		this.b = b;
+		this.m = m;
+		this.p = p;
+	}
+
 	public static ModHash GetFunc(int m, long p){
-		// TODO implement random choice of mod function from family
-		return null;
+		long a =  ThreadLocalRandom.current().nextLong(1,p);
+		long b = ThreadLocalRandom.current().nextLong(0,p);
+		ModHash res = new ModHash(a,b,p,m);
+		return res;
 	}
 	
 	public int Hash(long key) {
-		// TODO implement hash function
-		return 0;
+		return (int)(((this.a*key + this.b) % p) % m);
 	}
 }
