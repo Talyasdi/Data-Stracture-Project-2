@@ -8,7 +8,6 @@ public abstract class OAHashTable implements IHashTable {
 		this.m = m;
 	}
 	
-	
 	@Override
 	public HashTableElement Find(long key) {
 		int hash_res;
@@ -37,7 +36,6 @@ public abstract class OAHashTable implements IHashTable {
 		int first_deleted = -1;
 		for (int i=0 ; i < this.table.length ; i++ ){
 			hash_res = Hash(hte.GetKey(), i);
-
 			// Checks if the key of hte already exists
 			if (this.table[hash_res] != null && this.table[hash_res].GetKey() == hte.GetKey()){
 				throw new KeyAlreadyExistsException(hte);
@@ -71,9 +69,11 @@ public abstract class OAHashTable implements IHashTable {
 	public void Delete(long key) throws KeyDoesntExistException {
 		// Finding the index of the element with key, if exists
 		int index = -1;
+		int hash_res = -1;
 		for (int i=0 ; i < this.table.length ; i++ ) {
-			if (this.table[i] != null && this.table[i].GetKey() == key){
-				index = i;
+			hash_res = Hash(key, i);
+			if (this.table[hash_res] != null && this.table[hash_res].GetKey() == key){
+				index = hash_res;
 				break;
 			}
 		}
