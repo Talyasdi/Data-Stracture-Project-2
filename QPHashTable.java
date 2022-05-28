@@ -12,7 +12,7 @@ public class QPHashTable extends OAHashTable {
 	
 	@Override
 	public int Hash(long x, int i) {
-		int res = (int) ((hash_func.Hash(x) + Math.pow(i, 2)) % this.m);
+		int res = (int) (((long)hash_func.Hash(x) + (long)(i*i)) % this.m);
 		return res;
 	}
 }

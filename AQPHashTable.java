@@ -18,7 +18,7 @@ public class AQPHashTable extends OAHashTable {
 		else{
 			one = -1;
 		}
-		int res = (hash_func.Hash(x) + (one * i * i)) % this.m;
+		int res = (int)(((long)hash_func.Hash(x) + (long)(one * i * i)) % this.m);
 		if (res < 0){
 			res += this.m;
 		}
