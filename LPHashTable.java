@@ -12,6 +12,7 @@ public class LPHashTable extends OAHashTable {
 	
 	@Override
 	public int Hash(long x, int i) {
+		// res = ( h'(x) + i ) mod m
 		int res = (hash_func.Hash(x) + i) % this.m;
 		return res;
 	}

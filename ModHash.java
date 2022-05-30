@@ -14,13 +14,19 @@ public class ModHash {
 	}
 
 	public static ModHash GetFunc(int m, long p){
+		// Range of random a:  1 <= a < p
 		long a =  ThreadLocalRandom.current().nextLong(1,p);
+
+		// Range of random b:  0 <= a < p
 		long b = ThreadLocalRandom.current().nextLong(0,p);
+
+		// Returning ModHash object, representing the Universal Function
 		ModHash res = new ModHash(a,b,p,m);
 		return res;
 	}
 	
 	public int Hash(long key) {
+		// Hash(k) = ((a*k + b) % p) % m , as we learned about Universal Functions
 		return (int)(((this.a*key + this.b) % p) % m);
 	}
 }

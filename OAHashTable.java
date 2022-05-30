@@ -72,6 +72,8 @@ public abstract class OAHashTable implements IHashTable {
 		int hash_res = -1;
 		for (int i=0 ; i < this.table.length ; i++ ) {
 			hash_res = Hash(key, i);
+
+			// In case we found the key at the table, stop
 			if (this.table[hash_res] != null && this.table[hash_res].GetKey() == key){
 				index = hash_res;
 				break;
@@ -82,6 +84,8 @@ public abstract class OAHashTable implements IHashTable {
 		if (index == -1){
 			throw new KeyDoesntExistException(key);
 		}
+
+		// If we found the key, replace the element at the table with deleted one (key=-1)
 		else {
 			HashTableElement deleted_element = new HashTableElement(-1 , this.table[index].GetValue());
 			this.table[index] = deleted_element;
