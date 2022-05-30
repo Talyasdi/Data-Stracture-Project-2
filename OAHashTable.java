@@ -11,7 +11,6 @@ public abstract class OAHashTable implements IHashTable {
 	@Override
 	public HashTableElement Find(long key) {
 		int hash_res;
-
 		for (int i=0 ; i < this.table.length ; i++ ) {
 			hash_res = Hash(key, i);
 
@@ -25,7 +24,6 @@ public abstract class OAHashTable implements IHashTable {
 				return this.table[hash_res];
 			}
 		}
-
 		return null;
 	}
 	
@@ -59,9 +57,15 @@ public abstract class OAHashTable implements IHashTable {
 				break;
 			}
 		}
-
+		// In case we did not insert to the table
 		if (notfind){
-			throw new TableIsFullException(hte);
+			// In case there was not null at the table, but we found deleted element we can insert instead of it
+			if (first_deleted != -1){
+				this.table[first_deleted] = hte;
+			}
+			else {
+				throw new TableIsFullException(hte);
+			}
 		}
 	}
 	
