@@ -3,30 +3,104 @@ import java.util.*;
 import static java.lang.System.currentTimeMillis;
 
 public class MyTest {
-/***
      public static void main(String[] args) {
-         QPHashTable tb = new QPHashTable(10000019, 1000000007);
-         long time = currentTimeMillis();
          //first n: 5000009
          //sec n: 9500018
+         HashTableElement[] tb = new HashTableElement[5000009];
          for (int i=0; i< 5000009; i++) {
              Random rnd = new Random();
              long b_i = rnd.nextInt(100);
              long a_i = 100 * i + b_i;
              HashTableElement hte = new HashTableElement(a_i, a_i);
+             //System.out.println(hte.GetKey());
+             tb[i] = hte;
+         }
+
+         LP(tb);
+         AQP(tb);
+         QP(tb);
+         Double(tb);
+
+     }
+
+     public static void LP (HashTableElement[] arr){
+         LPHashTable tb = new LPHashTable(10000019, 1000000007);
+         System.out.println("len of arr: " + arr.length);
+         int coun = 0;
+         long time = currentTimeMillis();
+         //first n: 5000009
+         //sec n: 9500018
+         for (int i=0; i< arr.length; i++) {
              try {
-                 tb.Insert(hte);
+                 //System.out.println("inserting: " + arr[i].GetKey());
+                 tb.Insert(arr[i]);
+                 coun++;
              } catch (IHashTable.KeyAlreadyExistsException ex) {
-                 System.out.println("oops key already exists, i: " + i + ", ai: " + a_i);
+                 System.out.println("oops key already exists, i: " + i + ", ai: " + arr[i]);
              } catch (IHashTable.TableIsFullException ex) {
-                 System.out.println("oops table is full, i: " + i + ", ai: " + a_i);
+                 System.out.println("oops table is full, i: " + i + ", ai: " + arr[i]);
              }
          }
          long after = currentTimeMillis();
-         System.out.println((after-time) * 0.001);
+         System.out.println( "LP: " + ((after-time)));
+         System.out.println("coun: "+ coun);
      }
 
- ***/
+    public static void AQP (HashTableElement[] arr){
+        AQPHashTable tb = new AQPHashTable(10000019, 1000000007);
+        long time = currentTimeMillis();
+        //first n: 5000009
+        //sec n: 9500018
+        for (int i=0; i< arr.length; i++) {
+            try {
+                tb.Insert(arr[i]);
+            } catch (IHashTable.KeyAlreadyExistsException ex) {
+                System.out.println("oops key already exists, i: " + i + ", ai: " + arr[i]);
+            } catch (IHashTable.TableIsFullException ex) {
+                System.out.println("oops table is full, i: " + i + ", ai: " + arr[i]);
+            }
+        }
+        long after = currentTimeMillis();
+        System.out.println("AQP: " + ((after-time) * 0.001));
+    }
+
+    public static void QP (HashTableElement[] arr){
+        QPHashTable tb = new QPHashTable(10000019, 1000000007);
+        long time = currentTimeMillis();
+        //first n: 5000009
+        //sec n: 9500018
+        for (int i=0; i< arr.length; i++) {
+            try {
+                tb.Insert(arr[i]);
+            } catch (IHashTable.KeyAlreadyExistsException ex) {
+                System.out.println("oops key already exists, i: " + i + ", ai: " + arr[i]);
+            } catch (IHashTable.TableIsFullException ex) {
+                System.out.println("oops table is full, i: " + i + ", ai: " + arr[i]);
+            }
+        }
+        long after = currentTimeMillis();
+        System.out.println("QP: " + ((after-time) * 0.001));
+    }
+
+    public static void Double (HashTableElement[] arr){
+        DoubleHashTable tb = new DoubleHashTable(10000019, 1000000007);
+        long time = currentTimeMillis();
+        //first n: 5000009
+        //sec n: 9500018
+        for (int i=0; i< arr.length; i++) {
+            try {
+                tb.Insert(arr[i]);
+            } catch (IHashTable.KeyAlreadyExistsException ex) {
+                System.out.println("oops key already exists, i: " + i + ", ai: " + arr[i]);
+            } catch (IHashTable.TableIsFullException ex) {
+                System.out.println("oops table is full, i: " + i + ", ai: " + arr[i]);
+            }
+        }
+        long after = currentTimeMillis();
+        System.out.println("Double: " + ((after-time) * 0.001));
+    }
+
+    /***
 
     public static void main(String[] args) {
         DoubleHashTable tb = new DoubleHashTable(10000019, 1000000007);
@@ -68,4 +142,5 @@ public class MyTest {
         System.out.println("after 3: " + (time_after_3 - time_first)*0.001);
         System.out.println("after 6: " + (time_end - time_after_3)*0.001);
     }
+     ***/
 }
