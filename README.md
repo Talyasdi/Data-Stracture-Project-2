@@ -1,6 +1,7 @@
 # AQPHashTable, DoubleHashTable, LPHashTable, QPHashTable Implementation README
 
 These Java classes represent different types of open addressing hash tables with various collision resolution strategies. Each class extends the abstract class `OAHashTable` and implements the `IHashTable` interface.
+The project is part of "Data Structures" course.
 
 ## AQPHashTable
 
